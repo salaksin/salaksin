@@ -49,18 +49,18 @@ input, select, textarea, button {
 }
 
 input, textarea {
-    background-color: #222;
+    background-color: #000000;
     color: white;
 }
 
 select {
-    background-color: #333;
+    background-color: #000000;
     color: white;
     cursor: pointer;
 }
 
 button {
-    background-color: #444;
+    background-color: #000000;
     color: white;
     cursor: pointer;
     font-weight: bold;
