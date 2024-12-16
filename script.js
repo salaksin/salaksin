@@ -1,53 +1,59 @@
-// Handle form submission
-document.getElementById("submitBtn").addEventListener("click", async () => {
-    const recipient = document.getElementById("emailBox").value.trim();
-    const reason = document.getElementById("reasonDropdown").value;
-    const customTextBox = document.getElementById("customReasonBox");
-    const customReason = customTextBox ? customTextBox.value.trim() : null;
+// Elements
+const reasonDropdown = document.getElementById("reason");
+const customReasonContainer = document.getElementById("custom-reason-container");
+const submitButton = document.getElementById("submit-btn");
+const recipientInput = document.getElementById("recipient");
+const customReasonInput = document.getElementById("custom-reason");
 
-    if (!recipient || !reason) {
-        alert("Lütfen alıcıyı ve sebebi doldurun.");
-        return;
-    }
-
-    if (reason === "kendim yazacağım" && !customReason) {
-        alert("Lütfen kendi sebebinizi yazın.");
-        return;
-    }
-
-    // Prepare data for the backend
-    const requestData = {
-        recipient,
-        reason,
-        custom: reason === "kendim yazacağım" ? customReason : null,
-    };
-
-    try {
-        const response = await fetch("https://salaksin-worker.internet-relay-cat.workers.dev", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestData),
-        });
-
-        if (response.ok) {
-            const result = await response.text();
-            alert(result); // Show success message
-        } else {
-            const error = await response.text();
-            alert(`Hata: ${error}`);
-        }
-    } catch (err) {
-        console.error("Error:", err);
-        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+// Toggle custom text box based on dropdown selection
+reasonDropdown.addEventListener("change", () => {
+    if (reasonDropdown.value === "custom") {
+        customReasonContainer.style.display = "block";
+    } else {
+        customReasonContainer.style.display = "none";
     }
 });
 
-// Handle dynamic enabling of the custom reason text box
-document.getElementById("reasonDropdown").addEventListener("change", (e) => {
-    const customTextBox = document.getElementById("customReasonContainer");
-    if (e.target.value === "kendim yazacağım") {
-        customTextBox.style.display = "block"; // Show custom reason text box
+// Handle form submission
+submitButton.addEventListener("click", async () => {
+    const recipient = recipientInput.value.trim();
+    const reason = reasonDropdown.value;
+
+    if (!recipient || !recipient.includes("@")) {
+        alert("Lütfen geçerli bir e-posta adresi girin.");
+        return;
+    }
+
+    let emailBody = "birisi senin salak olduğunu düşünüyor. sebebi ise ";
+
+    // Determine the reason
+    if (reason === "beni terk etti") {
+        emailBody += "onu terk etmen.";
+    } else if (reason === "beni reddetti") {
+        emailBody += "onu reddetmen.";
+    } else if (reason === "custom") {
+        const customText = customReasonInput.value.trim();
+        if (!customText) {
+            alert("Lütfen bir neden yazın.");
+            return;
+        }
+        emailBody += customText;
+    }
+
+    // Send data to backend Worker
+    const response = await fetch("https://salaksin-worker.internet-relay-cat.workers.dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            recipient: recipient,
+            subject: "birisi senin salak olduğunu düşünüyor.",
+            content: emailBody,
+        }),
+    });
+
+    if (response.ok) {
+        alert("E-posta başarıyla gönderildi!");
     } else {
-        customTextBox.style.display = "none"; // Hide it
+        alert("E-posta gönderilirken bir hata oluştu. Tekrar deneyin.");
     }
 });
