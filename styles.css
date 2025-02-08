@@ -1,72 +1,40 @@
-/* General Reset */
-body, h1, label, select, input, button, textarea {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body and Container */
 body {
-    background-color: black;
-    color: white;
-    font-family: Cambria, serif;
+    background-color: #f5d100;
+    font-family: 'Skribblugh', sans-serif;
+    color: black;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    text-align: center;
+    flex-direction: column;
 }
 
 .container {
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
+    max-width: 90%;
 }
 
-h1 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+.logo {
+    width: 210px;
+    height: auto;
+    margin-bottom: -120px;
 }
 
-/* Form Section */
-.form-section {
-    margin-bottom: 1.5rem;
-    text-align: left;
+.container p {
+    font-size: 48px;
 }
 
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-input, select, textarea, button {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    margin-top: 0.5rem;
-}
-
-input, textarea {
-    background-color: #000000;
-    color: white;
-}
-
-select {
-    background-color: #000000;
-    color: white;
-    cursor: pointer;
-}
-
-button {
-    background-color: #000000;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #666;
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    
+    .container p {
+        font-size: 18px;
+    }
+    
+    .logo {
+        width: 120px;
+    }
 }
