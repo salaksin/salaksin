@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Skribblugh';
+    src: url('skri.ttf') format('truetype');
+}
+
 body {
     background-color: #f5d100;
     font-family: 'Skribblugh', sans-serif;
@@ -9,6 +14,7 @@ body {
     height: 100vh;
     text-align: center;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .container {
@@ -16,25 +22,35 @@ body {
 }
 
 .logo {
-    width: 210px;
+    width: 210px; /* Adjust this value as needed */
     height: auto;
     margin-bottom: -120px;
 }
 
 .container p {
-    font-size: 48px;
+    font-size: 48px; /* Adjust this value as needed */
 }
 
 @media (max-width: 768px) {
     body {
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .container {
+        max-width: 100%;
     }
     
     .container p {
-        font-size: 18px;
+        font-size: 18px; /* Smaller font size for mobile */
     }
     
     .logo {
-        width: 120px;
+        width: 120px; /* Adjust this value for smaller screens */
     }
 }
