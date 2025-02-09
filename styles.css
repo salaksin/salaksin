@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #f5d100;
+    background-color: #ffb200;
     font-family: 'Skribblugh', sans-serif;
     color: black;
     margin: 0;
@@ -22,13 +22,13 @@ body {
 }
 
 .logo {
-    width: 210px; /* Adjust this value as needed */
+    width: 210px;
     height: auto;
     margin-bottom: -120px;
 }
 
 .container p {
-    font-size: 48px; /* Adjust this value as needed */
+    font-size: 48px;
 }
 
 @media (max-width: 768px) {
@@ -47,10 +47,10 @@ body {
     }
     
     .container p {
-        font-size: 18px; /* Smaller font size for mobile */
+        font-size: 36px;
     }
     
     .logo {
-        width: 120px; /* Adjust this value for smaller screens */
+        width: 180px;
     }
 }
