@@ -31,27 +31,53 @@ body {
     font-size: 48px;
 }
 
+/* Input Box Styling */
+.input-wrapper {
+    position: relative;
+    width: 500px;  /* Made both bigger */
+    height: 120px; /* Same height */
+    margin-top: 20px;
+    background: url('bar.svg') no-repeat center;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Input Fields */
+.input-wrapper input,
+.input-wrapper textarea {
+    width: 55%;
+    height: 10%;
+    border: none;
+    background: transparent;
+    font-size: 32px; /* Bigger text */
+    text-align: center;
+    font-family: 'Skribblugh', sans-serif;
+    color: black;
+    outline: none;
+    resize: none;
+    padding: 10px;
+}
+
+/* Ensure Message Box is Large Enough */
+.message-box {
+    height: 340px; /* Same size as email */
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-    body {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
+    .input-wrapper {
+        width: 360px;
+        height: 100px;
     }
-    
-    .container {
-        max-width: 100%;
+
+    .message-box {
+        height: 100px;
     }
-    
-    .container p {
-        font-size: 36px;
-        color: black;
-    }
-    
-    .logo {
-        width: 180px;
+
+    .input-wrapper input,
+    .input-wrapper textarea {
+        font-size: 24px;
     }
 }

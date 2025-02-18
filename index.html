@@ -11,7 +11,50 @@
 <body>
     <div class="container">
         <img src="salaksin_logo.svg" alt="salaksin logo" class="logo">
-        <p>anlık derleyip toparlıyoruz<br>...çok yakın zamanda!</p>
+        <p>sence o bir salak<br>... ve ona bunu söylemenin tam vakti!</p>
+        
+        <!-- Email Input -->
+        <div class="input-wrapper email-box">
+            <input type="email" id="email" placeholder="nedir onun mail'i?">
+        </div>
+
+        <!-- Message Input -->
+        <div class="input-wrapper message-box">
+            <textarea id="message" placeholder="neden salak?"></textarea>
+        </div>
     </div>
+
+    <script>
+        document.addEventListener('keydown', async function(event) {
+            if (event.key === 'Enter') {
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                // Check if email and message are valid
+                if (email && message.length >= 5) {
+                    try {
+                        const response = await fetch('salakmail.kuroyakimori.workers.dev', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email: email, message: message })
+                        });
+
+                        const result = await response.json();
+                        if (response.ok) {
+                            alert('Email sent successfully!');
+                        } else {
+                            alert('Error: ' + result.error);
+                        }
+                    } catch (error) {
+                        alert('Failed to send email: ' + error.message);
+                    }
+                } else {
+                    alert('Please fill out both the email and message fields.');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
